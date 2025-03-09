@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import Editor from "@monaco-editor/react";
 import Base64Url from "../util/base64url";
-import EditorControls, {
-  getLanguage,
-  Language,
-  Languages,
-} from "./EditorControls";
+import EditorControls from "./EditorControls";
+import { getLanguage, Language, Languages } from "./Language";
 
 const getQueryParam = (param: string): string | null => {
   const urlParams = new URLSearchParams(window.location.search);
