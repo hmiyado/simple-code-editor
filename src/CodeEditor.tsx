@@ -1,15 +1,9 @@
 import { useEffect, useState } from "react";
-import Prism from "prismjs";
-import "prismjs/themes/prism.css";
-import "prismjs/components/prism-javascript";
-import "prismjs/components/prism-typescript";
-import "prismjs/components/prism-python";
-import "prismjs/components/prism-kotlin";
-import "prismjs/components/prism-swift";
+import Editor from "@monaco-editor/react";
 
-const getQueryParam = (param: string) => {
+const getQueryParam = (param: string): string | null => {
   const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get(param) ?? "";
+  return urlParams.get(param);
 };
 
 export default function CodeEditor() {
@@ -17,26 +11,24 @@ export default function CodeEditor() {
   const [language, setLanguage] = useState("javascript");
 
   useEffect(() => {
-    setCode(getQueryParam("code"));
-    setLanguage(getQueryParam("lang") || "javascript");
+    setCode(getQueryParam("code") ?? "");
+    setLanguage(getQueryParam("lang") ?? "javascript");
   }, []);
 
-  useEffect(() => {
-    Prism.highlightAll();
-  }, [code, language]);
-
   return (
-    <div>
-      <pre>
-        <code
-          className={`language-${language}`}
-          contentEditable
-          suppressContentEditableWarning
-          onInput={(e) => setCode(e.currentTarget.innerText)}
-        >
-          {code}
-        </code>
-      </pre>
-    </div>
+    <Editor
+      height="400px"
+      defaultLanguage={language}
+      defaultValue={code}
+      onChange={(value) => setCode(value ?? "")}
+      theme="vs-dark"
+      options={{
+        minimap: { enabled: false },
+        fontSize: 16,
+        wordWrap: "on",
+        scrollBeyondLastLine: false,
+        lineNumbers: "on",
+      }}
+    />
   );
 }

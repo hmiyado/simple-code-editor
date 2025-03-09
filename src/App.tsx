@@ -3,7 +3,7 @@ import CodeEditor from "./CodeEditor";
 function App() {
   return (
     <div>
-      <h1>オンラインコードエディタ</h1>
+      <h1>Simple Code Editor</h1>
       <CodeEditor />
     </div>
   );
