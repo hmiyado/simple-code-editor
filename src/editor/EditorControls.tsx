@@ -4,7 +4,7 @@ import { getLanguage, Language, Languages } from "./Language";
 const generateShareableURL = (
   window: Window,
   code: string,
-  language: string
+  language: string,
 ) => {
   const url = new URL(window.location.toString());
   url.searchParams.set("code", Base64Url.encode(code));
@@ -20,7 +20,7 @@ export default function EditorControls(
     code: string;
     copied: boolean;
     setCopied: (copied: boolean) => void;
-  }>
+  }>,
 ) {
   const { className, language, setLanguage, code, copied, setCopied } = props;
   const copyURL = async () => {
