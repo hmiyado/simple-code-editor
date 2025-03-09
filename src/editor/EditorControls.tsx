@@ -14,6 +14,7 @@ const generateShareableURL = (
 
 export default function EditorControls(
   props: Readonly<{
+    className: string | undefined;
     language: Language;
     setLanguage: (lang: Language) => void;
     code: string;
@@ -21,7 +22,7 @@ export default function EditorControls(
     setCopied: (copied: boolean) => void;
   }>
 ) {
-  const { language, setLanguage, code, copied, setCopied } = props;
+  const { className, language, setLanguage, code, copied, setCopied } = props;
   const copyURL = async () => {
     const shareableURL = generateShareableURL(window, code, language.value);
     try {
@@ -33,10 +34,10 @@ export default function EditorControls(
   };
 
   return (
-    <div>
+    <div className={className}>
       <select
         id="language"
-        className="select"
+        className="select is-small"
         value={language.value}
         onChange={(e) => setLanguage(getLanguage(e.target.value))}
       >
@@ -47,7 +48,7 @@ export default function EditorControls(
         ))}
       </select>
       <button
-        className="button"
+        className="button is-small"
         onClick={copyURL}
         style={{ marginLeft: "10px" }}
       >

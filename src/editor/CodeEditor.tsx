@@ -20,30 +20,34 @@ export default function CodeEditor() {
   }, []);
 
   return (
-    <div>
-      <Editor
-        defaultLanguage={language.value}
-        language={language.value}
-        defaultValue={code}
-        onChange={(value) => setCode(value ?? "")}
-        theme="vs-dark"
-        width={"100%"}
-        height={"75vh"}
-        options={{
-          minimap: { enabled: false },
-          fontSize: 16,
-          wordWrap: "on",
-          scrollBeyondLastLine: false,
-          lineNumbers: "on",
-        }}
-      />
-      <EditorControls
-        language={language}
-        setLanguage={setLanguage}
-        code={code}
-        copied={copied}
-        setCopied={setCopied}
-      />
+    <div className="fixed-grid has-1-cols">
+      <div className="grid">
+        <Editor
+          className="cell"
+          defaultLanguage={language.value}
+          language={language.value}
+          defaultValue={code}
+          onChange={(value) => setCode(value ?? "")}
+          theme="vs-dark"
+          width={"100%"}
+          height={"75vh"}
+          options={{
+            minimap: { enabled: false },
+            fontSize: 16,
+            wordWrap: "on",
+            scrollBeyondLastLine: false,
+            lineNumbers: "on",
+          }}
+        />
+        <EditorControls
+          className="cell"
+          language={language}
+          setLanguage={setLanguage}
+          code={code}
+          copied={copied}
+          setCopied={setCopied}
+        />
+      </div>
     </div>
   );
 }
