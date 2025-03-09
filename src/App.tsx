@@ -9,7 +9,9 @@ function App() {
         <CodeEditor />
       </div>
       <footer className="footer">
-        <a href="https://github.com/hmiyado/simple-code-editor">GitHub</a>
+        <p className="content has-text-centered">
+          <a href="https://github.com/hmiyado/simple-code-editor">GitHub</a>
+        </p>
       </footer>
     </div>
   );
