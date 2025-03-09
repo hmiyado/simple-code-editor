@@ -30,7 +30,7 @@ export default function CodeEditor() {
           onChange={(value) => setCode(value ?? "")}
           theme="vs-dark"
           width={"100%"}
-          height={"75vh"}
+          height={"70vh"}
           options={{
             minimap: { enabled: false },
             fontSize: 16,
