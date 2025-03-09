@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Editor from "@monaco-editor/react";
-import Base64Url from "./util/base64url";
+import Base64Url from "../util/base64url";
 
 // generate const types for languages
 type Language =
