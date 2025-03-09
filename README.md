@@ -17,3 +17,5 @@ npm run dev
 npm run predeploy
 npm run build
 ```
+
+or push to the `main` branch then the GitHub Actions will deploy automatically.
