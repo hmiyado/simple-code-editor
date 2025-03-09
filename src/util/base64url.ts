@@ -1,5 +1,9 @@
 const encode = (str: string): string => {
-    return btoa(str).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    const uriComponent = encodeURIComponent(str);
+    return btoa(uriComponent)
+        .replace(/\+/g, "-")
+        .replace(/\//g, "_")
+        .replace(/=+$/, "");
   };
   
 const decode = (str: string): string => {
@@ -8,7 +12,7 @@ const decode = (str: string): string => {
       str += "=";
     }
     try {
-      return atob(str);
+      return decodeURIComponent(atob(str));
     } catch {
       return "";
     }
