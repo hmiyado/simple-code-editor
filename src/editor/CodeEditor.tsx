@@ -22,12 +22,13 @@ export default function CodeEditor() {
   return (
     <div>
       <Editor
-        height="400px"
         defaultLanguage={language.value}
         language={language.value}
         defaultValue={code}
         onChange={(value) => setCode(value ?? "")}
         theme="vs-dark"
+        width={"100%"}
+        height={"75vh"}
         options={{
           minimap: { enabled: false },
           fontSize: 16,

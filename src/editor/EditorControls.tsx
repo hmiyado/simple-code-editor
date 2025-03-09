@@ -34,9 +34,9 @@ export default function EditorControls(
 
   return (
     <div>
-      <label htmlFor="language">言語: </label>
       <select
         id="language"
+        className="select"
         value={language.value}
         onChange={(e) => setLanguage(getLanguage(e.target.value))}
       >
@@ -46,7 +46,11 @@ export default function EditorControls(
           </option>
         ))}
       </select>
-      <button onClick={copyURL} style={{ marginLeft: "10px" }}>
+      <button
+        className="button"
+        onClick={copyURL}
+        style={{ marginLeft: "10px" }}
+      >
         Copy URL {copied ? "✅" : ""}
       </button>
     </div>
