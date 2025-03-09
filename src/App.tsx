@@ -8,6 +8,9 @@ function App() {
       <div className="box">
         <CodeEditor />
       </div>
+      <footer className="footer">
+        <a href="https://github.com/hmiyado/simple-code-editor">GitHub</a>
+      </footer>
     </div>
   );
 }
