@@ -1,56 +1,15 @@
 import { useEffect, useState } from "react";
 import Editor from "@monaco-editor/react";
 import Base64Url from "../util/base64url";
-
-// generate const types for languages
-type Language =
-  | {
-      label: "JavaScript";
-      value: "javascript";
-    }
-  | {
-      label: "TypeScript";
-      value: "typescript";
-    }
-  | {
-      label: "Python";
-      value: "python";
-    }
-  | {
-      label: "Kotlin";
-      value: "kotlin";
-    }
-  | {
-      label: "Swift";
-      value: "swift";
-    };
-
-const Languages: Language[] = [
-  { label: "JavaScript", value: "javascript" },
-  { label: "TypeScript", value: "typescript" },
-  { label: "Python", value: "python" },
-  { label: "Kotlin", value: "kotlin" },
-  { label: "Swift", value: "swift" },
-];
+import EditorControls, {
+  getLanguage,
+  Language,
+  Languages,
+} from "./EditorControls";
 
 const getQueryParam = (param: string): string | null => {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get(param);
-};
-
-const getLanguage = (lang: string): Language => {
-  return Languages.find((language) => language.value === lang) ?? Languages[0];
-};
-
-const generateShareableURL = (
-  window: Window,
-  code: string,
-  language: string
-) => {
-  const url = new URL(window.location.toString());
-  url.searchParams.set("code", Base64Url.encode(code));
-  url.searchParams.set("lang", language);
-  return url.toString();
 };
 
 export default function CodeEditor() {
@@ -62,16 +21,6 @@ export default function CodeEditor() {
     setCode(Base64Url.decode(getQueryParam("code") ?? ""));
     setLanguage(getLanguage(getQueryParam("lang") ?? ""));
   }, []);
-
-  const copyURL = async () => {
-    const shareableURL = generateShareableURL(window, code, language.value);
-    try {
-      await navigator.clipboard.writeText(shareableURL);
-      setCopied(true);
-    } catch {
-      setCopied(false);
-    }
-  };
 
   return (
     <div>
@@ -90,23 +39,13 @@ export default function CodeEditor() {
           lineNumbers: "on",
         }}
       />
-      <div style={{ marginBottom: "10px" }}>
-        <label htmlFor="language">言語: </label>
-        <select
-          id="language"
-          value={language.value}
-          onChange={(e) => setLanguage(getLanguage(e.target.value))}
-        >
-          {Languages.map((lang) => (
-            <option key={lang.value} value={lang.value}>
-              {lang.label}
-            </option>
-          ))}
-        </select>
-        <button onClick={copyURL} style={{ marginLeft: "10px" }}>
-          Copy URL {copied ? "✅" : ""}
-        </button>
-      </div>
+      <EditorControls
+        language={language}
+        setLanguage={setLanguage}
+        code={code}
+        copied={copied}
+        setCopied={setCopied}
+      />
     </div>
   );
 }
