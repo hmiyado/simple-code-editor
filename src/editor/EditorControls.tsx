@@ -1,4 +1,4 @@
-import Base64Url from "../util/base64url";
+import UrlEncoder from "../util/urlEncoder";
 import { getLanguage, Language, Languages } from "./Language";
 
 const generateShareableURL = (
@@ -7,7 +7,7 @@ const generateShareableURL = (
   language: string,
 ) => {
   const url = new URL(window.location.toString());
-  url.searchParams.set("code", Base64Url.encode(code));
+  url.searchParams.set("code", UrlEncoder.encode(code));
   url.searchParams.set("lang", language);
   return url.toString();
 };

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Editor from "@monaco-editor/react";
-import Base64Url from "../util/base64url";
+import UrlEncoder from "../util/urlEncoder";
 import EditorControls from "./EditorControls";
 import { getLanguage, Language, Languages } from "./Language";
 
@@ -15,7 +15,7 @@ export default function CodeEditor() {
   const [language, setLanguage] = useState<Language>(Languages[0]);
 
   useEffect(() => {
-    setCode(Base64Url.decode(getQueryParam("code") ?? ""));
+    setCode(UrlEncoder.decode(getQueryParam("code") ?? ""));
     setLanguage(getLanguage(getQueryParam("lang") ?? ""));
   }, []);
 
