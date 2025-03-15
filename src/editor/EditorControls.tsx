@@ -1,14 +1,15 @@
 import UrlEncoder from "../util/urlEncoder";
 import { getLanguage, Language, Languages } from "./Language";
+import { QueryParams } from "./QueryParams";
 
 const generateShareableURL = (
-  window: Window,
+  urlString: string,
   code: string,
   language: string,
 ) => {
-  const url = new URL(window.location.toString());
-  url.searchParams.set("code", UrlEncoder.encode(code));
-  url.searchParams.set("lang", language);
+  const url = new URL(urlString);
+  url.searchParams.set(QueryParams.code.patterns[0], UrlEncoder.encode(code));
+  url.searchParams.set(QueryParams.lang.patterns[0], language);
   return url.toString();
 };
 
@@ -24,7 +25,11 @@ export default function EditorControls(
 ) {
   const { className, language, setLanguage, code, copied, setCopied } = props;
   const copyURL = async () => {
-    const shareableURL = generateShareableURL(window, code, language.value);
+    const shareableURL = generateShareableURL(
+      window.location.toString(),
+      code,
+      language.value,
+    );
     try {
       await navigator.clipboard.writeText(shareableURL);
       setCopied(true);

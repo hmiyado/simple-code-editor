@@ -3,10 +3,14 @@ import Editor from "@monaco-editor/react";
 import UrlEncoder from "../util/urlEncoder";
 import EditorControls from "./EditorControls";
 import { getLanguage, Language, Languages } from "./Language";
+import { QueryParams } from "./QueryParams";
 
-const getQueryParam = (param: string): string | null => {
+const findQueryParam = (param: keyof typeof QueryParams): string | null => {
   const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get(param);
+  const actualKey = QueryParams[param].patterns.find((pattern) => {
+    return urlParams.has(pattern);
+  });
+  return urlParams.get(actualKey ?? "");
 };
 
 export default function CodeEditor() {
@@ -15,8 +19,8 @@ export default function CodeEditor() {
   const [language, setLanguage] = useState<Language>(Languages[0]);
 
   useEffect(() => {
-    setCode(UrlEncoder.decode(getQueryParam("code") ?? ""));
-    setLanguage(getLanguage(getQueryParam("lang") ?? ""));
+    setCode(UrlEncoder.decode(findQueryParam("code") ?? ""));
+    setLanguage(getLanguage(findQueryParam("lang") ?? ""));
   }, []);
 
   return (
