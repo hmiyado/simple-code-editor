@@ -31,6 +31,9 @@ export default function EditorControls(
       language.value,
     );
     try {
+      setCopied(false);
+      // await 100 ms to suppress flickering
+      await new Promise((resolve) => setTimeout(resolve, 100));
       await navigator.clipboard.writeText(shareableURL);
       setCopied(true);
     } catch {
