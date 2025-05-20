@@ -1,6 +1,7 @@
 import UrlEncoder from "../util/urlEncoder";
 import { getLanguage, Language, Languages } from "./Language";
 import { QueryParams } from "./QueryParams";
+import Timer from "../timer/Timer";
 
 const generateShareableURL = (
   urlString: string,
@@ -43,25 +44,30 @@ export default function EditorControls(
 
   return (
     <div className={className}>
-      <select
-        id="language"
-        className="select is-small"
-        value={language.value}
-        onChange={(e) => setLanguage(getLanguage(e.target.value))}
-      >
-        {Languages.map((lang) => (
-          <option key={lang.value} value={lang.value}>
-            {lang.label}
-          </option>
-        ))}
-      </select>
-      <button
-        className="button is-small"
-        onClick={copyURL}
-        style={{ marginLeft: "10px" }}
-      >
-        Copy URL {copied ? "✅" : ""}
-      </button>
+      <div className="is-flex is-justify-content-space-between">
+        <div>
+          <select
+            id="language"
+            className="select is-small"
+            value={language.value}
+            onChange={(e) => setLanguage(getLanguage(e.target.value))}
+          >
+            {Languages.map((lang) => (
+              <option key={lang.value} value={lang.value}>
+                {lang.label}
+              </option>
+            ))}
+          </select>
+          <button
+            className="button is-small"
+            onClick={copyURL}
+            style={{ marginLeft: "10px" }}
+          >
+            Copy URL {copied ? "✅" : ""}
+          </button>
+        </div>
+        <Timer />
+      </div>
     </div>
   );
 }
