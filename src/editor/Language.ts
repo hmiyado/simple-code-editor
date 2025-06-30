@@ -1,5 +1,6 @@
 export type Language =
   | {
+      // The label is the name of the language, and the value is the identifier for Monaco editor.
       label: "JavaScript";
       value: "javascript";
     }
@@ -18,6 +19,10 @@ export type Language =
   | {
       label: "Swift";
       value: "swift";
+    }
+  | {
+      label: "C++";
+      value: "cpp";
     };
 
 export const Languages: Language[] = [
@@ -26,6 +31,7 @@ export const Languages: Language[] = [
   { label: "Python", value: "python" },
   { label: "Kotlin", value: "kotlin" },
   { label: "Swift", value: "swift" },
+  { label: "C++", value: "cpp" },
 ];
 
 export const getLanguage = (lang: string): Language => {
