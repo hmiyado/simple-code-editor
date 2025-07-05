@@ -23,6 +23,10 @@ export type Language =
   | {
       label: "C++";
       value: "cpp";
+    }
+  | {
+      label: "Java";
+      value: "java";
     };
 
 export const Languages: Language[] = [
@@ -32,6 +36,7 @@ export const Languages: Language[] = [
   { label: "Kotlin", value: "kotlin" },
   { label: "Swift", value: "swift" },
   { label: "C++", value: "cpp" },
+  { label: "Java", value: "java" },
 ];
 
 export const getLanguage = (lang: string): Language => {
